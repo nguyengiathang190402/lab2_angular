@@ -1,0 +1,68 @@
+<p>student works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1 class="color-red font-weight-bold">Danh sách sinh viên</h1>
+  <p class="color-red font-weight-bold">{{title}}</p>
+  <p class="color-red font-weight-bold">{{thang}}</p>
+  <div class="form-group container">
+    <label for="searchInput">Search</label>
+    <input id="searchInput" type="text" class="form-control" placeholder="Search..."
+    (input)="onSearch($event)"
+    >
+    <p>{{searchValue}}</p>
+  </div>
+  <div class="container">
+    <h1 class="color-red font-weight-bold text-warning fs-3">Add new User</h1>
+    <div class="form-group">
+      <label for="name">Tên</label>
+      <input type="text" id="name" class="form-control" (input)="onChangeInput($event, 'name')" [value]="newUser.name">
+    </div>
+    <div class="form-group">
+      <label for="height">Chiều cao</label>
+      <input type="text" id="height" class="form-control" (input)="onChangeInput($event, 'height')" [value]="newUser.height">
+    </div>
+    <div class="form-group">
+      <label for="kg">Cân Nặng</label>
+      <input type="text" id="kg" class="form-control" (input)="onChangeInput($event, 'kg')" [value]="newUser.kg">
+    </div>
+    <div class="form-group">
+      <label for="img">Ảnh</label>
+      <input type="text" id="img" class="form-control" (input)="onChangeInput($event, 'img')" [value]="newUser.img">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" [disabled]="!onValidate(newUser)" (click)="onSubmit()">Gửi</button>
+    </div>
+  </div>
+  <div class="container">
+  <table class="table table-hover">
+    <thead>
+      <th>ID</th>
+      <th>Tên</th>
+      <th>Chiều cao</th>
+      <th>Cân nặng</th>
+      <th>Ảnh đại diện</th>
+      <th>Action</th>
+    </thead>
+    <tbody *ngIf="users.length > 0">
+      
+      <tr *ngFor="let student of filterUsers">
+        <td>{{student.id}}</td>
+        <td >{{student.name}}</td>
+        <td>{{student.height}}</td>
+        <td>{{student.kg}}kg</td>
+        <td><img width="100" [src]="student.img" alt=""></td>
+        <td><button (click)="remove(student.id)" class="btn btn-danger">Xoá</button>
+          <button (click)="onEdit(student)" class="btn btn-success">Sửa</button></td>
+        
+      </tr>
+
+    </tbody>
+  </table>
+</div>
